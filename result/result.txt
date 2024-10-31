@@ -1,0 +1,11 @@
+Part 1. Preparing Word Embeddings:
+1(a) Size of the vocabulary: 15812
+1(b) Number of OOV words: 550
+3.5 Best Accuracy for training (Added Attention):  {}
+3.5 Best Accuracy on test Set (Added Attention):  0.7213883399963379
+3.5 Best Accuracy for training (Added Dropout):  {}
+3.5 Best Accuracy on test Set (Added Dropout):  0.7373358607292175
+3.5 Best Accuracy for training (Added MultiHead Attention):  {}
+3.5 Best Accuracy on test Set (Added MultiHead Attention):  0.6688555479049683
+3.5 Best Accuracy for training (Added Label Smoothing 0.1):  {}
+3.5 Best Accuracy on test Set (Added Label Smoothing 0.1):  0.7279549837112427

@@ -1,0 +1,7 @@
+docker build -t tensorflow-gpu-cuda-devel .
+
+docker run --gpus all -p 8888:8888 -v /c/Users/Wilson/Desktop/NTU/SC4002/Project:/tf/notebooks tensorflow-gpu-jupyter-cudnn
+
+docker run --gpus all -v /c/Users/Wilson/Desktop/NTU/SC4002/Project/SC4002/code:/tf/code -v /c/Users/Wilson/Desktop/NTU/SC4002/Project/SC4002/models:/tf/models -v C:/Users/Wilson/Desktop/NTU/SC4002/Project/SC4002/result:/app/result -d -it tensorflow-gpu-cuda-devel
+
+docker exec -it <container_name_or_id> bash
