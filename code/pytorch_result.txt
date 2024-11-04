@@ -1,0 +1,4 @@
+Part 1. Preparing Word Embeddings:
+1(a) Size of the vocabulary: 15812
+hd1 = 32, hd2 = 16, dr = 0.5, epochs = 100
+Final Train Accuracy: 0.9890 Best Validation Accuracy: 0.7767 Test Accuracy: 0.7383
