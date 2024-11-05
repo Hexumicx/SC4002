@@ -1,3 +1,5 @@
 Part 1. Preparing Word Embeddings:
 1(a) Size of the vocabulary: 15812
 1(b) Number of OOV words: 550
+--------BiLSTM--------
+--------BiGRU--------

@@ -11,7 +11,7 @@ test_dataset = dataset ['test']
 # 2 for CNN
 # 6 for Attention + multihead + Label Smmoothing + dropout
 # 7 for add on to BiGRU
-Flag = 0
+Flag = 17
 
 
 # Part 1. Preparing Word Embeddings
@@ -707,7 +707,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 
-if not Flag or Flag ==6:
+if not Flag or Flag == 6 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -778,7 +778,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 # Train the model
-if not Flag or Flag ==6:
+if not Flag or Flag ==6 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -861,7 +861,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 # Train the model
-if not Flag or Flag ==6:
+if not Flag or Flag ==6 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -934,7 +934,7 @@ def train_model(optimizer, epochs, batch_size, lr, label_smoothing=0.1):
     return model, history
 
 # Train the model with label smoothing
-if not Flag or Flag ==6:
+if not Flag or Flag ==6 or Flag == 20:
     model, history = train_model("adagrad", epochs=10, batch_size=64, lr=0.01, label_smoothing=0.1)
     
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -1018,7 +1018,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 
-if not Flag or Flag == 7:
+if not Flag or Flag == 7 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -1089,7 +1089,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 # Train the model
-if not Flag or Flag == 7:
+if not Flag or Flag == 7 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -1172,7 +1172,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 # Train the model
-if not Flag or Flag == 7:
+if not Flag or Flag == 7 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -1245,7 +1245,7 @@ def train_model(optimizer, epochs, batch_size, lr, label_smoothing=0.1):
     return model, history
 
 # Train the model with label smoothing
-if not Flag or Flag == 7:
+if not Flag or Flag == 7 or Flag == 20:
     model, history = train_model("adagrad", epochs=10, batch_size=64, lr=0.01, label_smoothing=0.1)
     
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -1326,7 +1326,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 
-if not Flag or Flag == 10:
+if not Flag or Flag == 10 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -1419,7 +1419,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 
-if not Flag or Flag == 10 or Flag == 12:
+if not Flag or Flag == 10 or Flag == 12 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -1509,7 +1509,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 
-if not Flag or Flag == 10 or Flag == 13:
+if not Flag or Flag == 10 or Flag == 13 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -1586,7 +1586,7 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 
-if not Flag or Flag == 10 or Flag == 11:
+if not Flag or Flag == 10 or Flag == 11 or Flag == 20:
     model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
@@ -1596,3 +1596,310 @@ if not Flag or Flag == 10 or Flag == 11:
     print("Test accuracy:", accuracy[1])
     with open("/app/result/result.txt", "a") as file:
         print("3.5 Best Accuracy on test Set (bigru - attention - bigru): ", accuracy[1], file=file)
+
+
+
+
+
+
+
+
+############ BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ########################################## BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ##############################
+############ BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ########################################## BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ##############################
+############ BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ########################################## BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ##############################
+############ BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ########################################## BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ##############################
+############ BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ########################################## BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ##############################
+############ BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ########################################## BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ##############################
+############ BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ########################################## BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ##############################
+############ BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ########################################## BREAKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK ##############################
+
+
+
+
+
+@tf.keras.utils.register_keras_serializable()
+class Attention(Layer):
+    def __init__(self, units, **kwargs):
+        super(Attention, self).__init__(**kwargs)
+        self.units = units
+        self.W = Dense(units)
+        self.U = Dense(units)
+        self.V = Dense(1)
+
+    def build(self, input_shape):
+        # This method initializes the layer's state based on the input shape
+        super().build(input_shape)    
+
+    def call(self, hidden_states, mask=None):
+        # score = tf.nn.tanh(self.W(hidden_states))
+        # attention_weights = tf.nn.softmax(self.V(score), axis=1)
+        # context_vector = attention_weights * hidden_states
+        # context_vector = tf.reduce_sum(context_vector, axis=1)
+        # return context_vector
+        score = tf.nn.tanh(self.W(hidden_states))
+        attention_weights = tf.nn.softmax(self.V(score), axis=1)
+        
+        if mask is not None:
+            # Expand the mask to match attention_weights shape
+            mask = tf.cast(mask, dtype=attention_weights.dtype)
+            mask = tf.expand_dims(mask, axis=-1)
+            attention_weights *= mask  # Apply mask
+
+        attention_weights /= tf.reduce_sum(attention_weights, axis=1, keepdims=True)  # Renormalize
+
+        context_vector = attention_weights * hidden_states
+        context_vector = tf.reduce_sum(context_vector, axis=1)
+        return context_vector
+        
+    
+    def get_config(self):
+        config = super(Attention, self).get_config()
+        config.update({
+            "units": self.units
+        })
+        return config
+    
+def train_model(optimizer, epochs, batch_size, lr):
+    tf.random.set_seed(0)
+    np.random.seed(0)
+    random.seed(0)
+
+    custom_callback = CustomCallback()
+    checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+        filepath="model_combined.keras", 
+        monitor='val_accuracy',            
+        save_best_only=True,           
+        mode='max',                 
+        save_weights_only=False,       
+        verbose=1
+    )
+    model = Sequential([
+        Masking(mask_value=0), 
+        Embedding(input_dim=vocab_size,
+                  output_dim=embedding_dim,
+                  weights=[embedding_matrix],
+                  mask_zero=True,
+                  trainable=True),  
+        GRU(embedding_dim, return_sequences=True),
+        Attention(units=embedding_dim),  # Attention layer to compute context vector
+        Dropout(0.5), 
+        Dense(1, activation='sigmoid')
+    ])
+    if optimizer == 'adam': optimizer = tf.keras.optimizers.Adam(learning_rate=lr)
+    elif optimizer == 'sgd': optimizer = tf.keras.optimizers.SGD(learning_rate=lr)
+    elif optimizer == 'rmsprop': optimizer = tf.keras.optimizers.RMSprop(learning_rate=lr)
+    else: optimizer = tf.keras.optimizers.Adagrad(learning_rate=lr)
+    model.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['accuracy'])
+    history = model.fit(
+        X_train, y_train,
+        validation_data=(X_val, y_val),
+        epochs=epochs,
+        batch_size=batch_size,
+        callbacks=[custom_callback, checkpoint_callback]
+    )
+    return model, history
+
+
+if not Flag or Flag == 10 or Flag == 15 or Flag == 20:
+    model, history = train_model("adagrad", 100, 64, 0.01)
+
+    best_model = tf.keras.models.load_model("model_combined.keras")
+    accuracy = best_model.evaluate(X_test, y_test)
+    with open("/app/result/result.txt", "a") as file:
+        print("3.5 Best Accuracy for training (dimension == embedding_dim): ", best_accuracy, file=file)
+    print("Test accuracy:", accuracy[1])
+    with open("/app/result/result.txt", "a") as file:
+        print("3.5 Best Accuracy on test Set (dimension == embedding_dim): ", accuracy[1], file=file)
+#0.78893
+
+
+
+@tf.keras.utils.register_keras_serializable()
+class Attention(Layer):
+    def __init__(self, units, **kwargs):
+        super(Attention, self).__init__(**kwargs)
+        self.units = units
+        self.W = Dense(units)
+        self.U = Dense(units)
+        self.V = Dense(1)
+
+    def build(self, input_shape):
+        # This method initializes the layer's state based on the input shape
+        super().build(input_shape)    
+
+    def call(self, hidden_states, mask=None):
+        # score = tf.nn.tanh(self.W(hidden_states))
+        # attention_weights = tf.nn.softmax(self.V(score), axis=1)
+        # context_vector = attention_weights * hidden_states
+        # context_vector = tf.reduce_sum(context_vector, axis=1)
+        # return context_vector
+        score = tf.nn.tanh(self.W(hidden_states))
+        attention_weights = tf.nn.softmax(self.V(score), axis=1)
+        
+        if mask is not None:
+            # Expand the mask to match attention_weights shape
+            mask = tf.cast(mask, dtype=attention_weights.dtype)
+            mask = tf.expand_dims(mask, axis=-1)
+            attention_weights *= mask  # Apply mask
+
+        attention_weights /= tf.reduce_sum(attention_weights, axis=1, keepdims=True)  # Renormalize
+
+        context_vector = attention_weights * hidden_states
+        context_vector = tf.reduce_sum(context_vector, axis=1)
+        return context_vector
+        
+    
+    def get_config(self):
+        config = super(Attention, self).get_config()
+        config.update({
+            "units": self.units
+        })
+        return config
+    
+def train_model(optimizer, epochs, batch_size, lr):
+    tf.random.set_seed(0)
+    np.random.seed(0)
+    random.seed(0)
+
+    custom_callback = CustomCallback()
+    checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+        filepath="model_combined.keras", 
+        monitor='val_accuracy',            
+        save_best_only=True,           
+        mode='max',                 
+        save_weights_only=False,       
+        verbose=1
+    )
+    model = Sequential([
+        # Masking(mask_value=0), 
+        Embedding(input_dim=vocab_size,
+                  output_dim=embedding_dim,
+                  weights=[embedding_matrix],
+                #   mask_zero=True,
+                  trainable=True),  
+        GRU(embedding_dim, return_sequences=True),
+        Attention(units=embedding_dim),  # Attention layer to compute context vector
+        Dropout(0.2), 
+        Dense(1, activation='sigmoid')
+    ])
+    if optimizer == 'adam': optimizer = tf.keras.optimizers.Adam(learning_rate=lr)
+    elif optimizer == 'sgd': optimizer = tf.keras.optimizers.SGD(learning_rate=lr)
+    elif optimizer == 'rmsprop': optimizer = tf.keras.optimizers.RMSprop(learning_rate=lr)
+    else: optimizer = tf.keras.optimizers.Adagrad(learning_rate=lr)
+    model.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['accuracy'])
+    history = model.fit(
+        X_train, y_train,
+        validation_data=(X_val, y_val),
+        epochs=epochs,
+        batch_size=batch_size,
+        callbacks=[custom_callback, checkpoint_callback]
+    )
+    return model, history
+
+
+if not Flag or Flag == 10 or Flag == 16 or Flag == 20:
+    model, history = train_model("adagrad", 50, 64, 0.01)
+
+    best_model = tf.keras.models.load_model("model_combined.keras")
+    accuracy = best_model.evaluate(X_test, y_test)
+    with open("/app/result/result.txt", "a") as file:
+        print("3.5 Best Accuracy for training (dimension == embedding_dim): ", best_accuracy, file=file)
+    print("Test accuracy:", accuracy[1])
+    with open("/app/result/result.txt", "a") as file:
+        print("3.5 Best Accuracy on test Set (dimension == embedding_dim): ", accuracy[1], file=file)
+
+
+
+@tf.keras.utils.register_keras_serializable()
+class Attention(Layer):
+    def __init__(self, units, **kwargs):
+        super(Attention, self).__init__(**kwargs)
+        self.units = units
+        self.W = Dense(units)
+        self.U = Dense(units)
+        self.V = Dense(1)
+
+    def build(self, input_shape):
+        # This method initializes the layer's state based on the input shape
+        super().build(input_shape)    
+
+    def call(self, hidden_states, mask=None):
+        # score = tf.nn.tanh(self.W(hidden_states))
+        # attention_weights = tf.nn.softmax(self.V(score), axis=1)
+        # context_vector = attention_weights * hidden_states
+        # context_vector = tf.reduce_sum(context_vector, axis=1)
+        # return context_vector
+        score = tf.nn.tanh(self.W(hidden_states))
+        attention_weights = tf.nn.softmax(self.V(score), axis=1)
+        
+        if mask is not None:
+            # Expand the mask to match attention_weights shape
+            mask = tf.cast(mask, dtype=attention_weights.dtype)
+            mask = tf.expand_dims(mask, axis=-1)
+            attention_weights *= mask  # Apply mask
+
+        attention_weights /= tf.reduce_sum(attention_weights, axis=1, keepdims=True)  # Renormalize
+
+        context_vector = attention_weights * hidden_states
+        context_vector = tf.reduce_sum(context_vector, axis=1)
+        return context_vector
+        
+    
+    def get_config(self):
+        config = super(Attention, self).get_config()
+        config.update({
+            "units": self.units
+        })
+        return config
+    
+def train_model(optimizer, epochs, batch_size, lr):
+    tf.random.set_seed(0)
+    np.random.seed(0)
+    random.seed(0)
+
+    custom_callback = CustomCallback()
+    checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+        filepath="model_combined.keras", 
+        monitor='val_accuracy',            
+        save_best_only=True,           
+        mode='max',                 
+        save_weights_only=False,       
+        verbose=1
+    )
+    model = Sequential([
+        Masking(mask_value=0), 
+        Embedding(input_dim=vocab_size,
+                  output_dim=embedding_dim,
+                  weights=[embedding_matrix],
+                  mask_zero=True,
+                  trainable=True),  
+        Bidirectional(GRU(embedding_dim, return_sequences=True)),
+        Attention(units=embedding_dim),  # Attention layer to compute context vector
+        Dropout(0.5), 
+        Dense(1, activation='sigmoid')
+    ])
+    if optimizer == 'adam': optimizer = tf.keras.optimizers.Adam(learning_rate=lr)
+    elif optimizer == 'sgd': optimizer = tf.keras.optimizers.SGD(learning_rate=lr)
+    elif optimizer == 'rmsprop': optimizer = tf.keras.optimizers.RMSprop(learning_rate=lr)
+    else: optimizer = tf.keras.optimizers.Adagrad(learning_rate=lr)
+    model.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['accuracy'])
+    history = model.fit(
+        X_train, y_train,
+        validation_data=(X_val, y_val),
+        epochs=epochs,
+        batch_size=batch_size,
+        callbacks=[custom_callback, checkpoint_callback]
+    )
+    return model, history
+
+
+if not Flag or Flag == 10 or Flag == 17 or Flag == 20:
+    model, history = train_model("sgd", 50, 128, 0.01)
+
+    best_model = tf.keras.models.load_model("model_combined.keras")
+    accuracy = best_model.evaluate(X_test, y_test)
+    with open("/app/result/result.txt", "a") as file:
+        print("3.5 Best Accuracy for training (dimension == embedding_dim): ", best_accuracy, file=file)
+    print("Test accuracy:", accuracy[1])
+    with open("/app/result/result.txt", "a") as file:
+        print("3.5 Best Accuracy on test Set (dimension == embedding_dim): ", accuracy[1], file=file)
