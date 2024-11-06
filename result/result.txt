@@ -3,3 +3,5 @@ Part 1. Preparing Word Embeddings:
 1(b) Number of OOV words: 550
 --------BiLSTM--------
 --------BiGRU--------
+3.5 Best Accuracy for training (Added Attention, dropout 0.2, BiGRU 32, 16):  {'accuracy': 0.7936210036277771, 'epoch': 233, 'optimizer': 'adagrad', 'batch_size': 128, 'lr': 0.01}
+3.5 Best Accuracy on test Set (Added Attention):  0.7711069583892822
