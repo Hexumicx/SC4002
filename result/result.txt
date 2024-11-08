@@ -1,7 +1,12 @@
 Part 1. Preparing Word Embeddings:
 1(a) Size of the vocabulary: 15812
 1(b) Number of OOV words: 550
---------BiLSTM--------
---------BiGRU--------
-3.5 Best Accuracy for training (Added Attention, dropout 0.2, BiGRU 32, 16):  {'accuracy': 0.7936210036277771, 'epoch': 233, 'optimizer': 'adagrad', 'batch_size': 128, 'lr': 0.01}
-3.5 Best Accuracy on test Set (Added Attention):  0.7711069583892822
+--------3.5 Enhancement--------
+3.5 Best Accuracy for training (biGRU with attention):  {'accuracy': 0.7617260813713074, 'epoch': 99, 'optimizer': 'adagrad', 'batch_size': 64, 'lr': 0.01}
+3.5 Best Accuracy on test Set (biGRU with attention):  0.7739211916923523
+3.5 Best Accuracy for training (final):  {'accuracy': 0.7617260813713074, 'epoch': 99, 'optimizer': 'adagrad', 'batch_size': 64, 'lr': 0.01}
+3.5 Best Accuracy on test Set (final):  0.7598499059677124
+3.5 Best Accuracy for training (parallel):  {'accuracy': 0.7617260813713074, 'epoch': 99, 'optimizer': 'adagrad', 'batch_size': 64, 'lr': 0.01}
+3.5 Best Accuracy on test Set (parallel):  0.7654784321784973
+3.5 Best Accuracy for training (transformer):  {'accuracy': 0.7617260813713074, 'epoch': 99, 'optimizer': 'adagrad', 'batch_size': 64, 'lr': 0.01}
+3.5 Best Accuracy on test Set (transformer):  0.7420262694358826

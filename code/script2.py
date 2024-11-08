@@ -11,7 +11,7 @@ test_dataset = dataset ['test']
 # 2 for CNN
 # 6 for Attention + multihead + Label Smmoothing + dropout
 # 7 for add on to BiGRU
-Flag = 25
+Flag = 27
 
 
 # Part 1. Preparing Word Embeddings
@@ -2578,6 +2578,88 @@ def train_model(optimizer, epochs, batch_size, lr):
 
 if not Flag or Flag == 10 or Flag == 26 or Flag == 20:
     model, history = train_model("adagrad", 50, 128, 0.01)
+
+    best_model = tf.keras.models.load_model("model_combined.keras")
+    accuracy = best_model.evaluate(X_test, y_test)
+    with open("/app/result/result.txt", "a") as file:
+        print("3.5 Best Accuracy for training (dimension == embedding_dim): ", best_accuracy, file=file)
+    print("Test accuracy:", accuracy[1])
+    with open("/app/result/result.txt", "a") as file:
+        print("3.5 Best Accuracy on test Set (dimension == embedding_dim): ", accuracy[1], file=file)
+
+
+from tensorflow.keras.layers import MultiHeadAttention, Input, Bidirectional, LSTM, Dropout, Dense, Lambda, GlobalMaxPooling1D, Flatten, GlobalAveragePooling1D, GRU
+from tensorflow.keras.models import Model
+
+def train_model(optimizer, epochs, batch_size, lr):
+    tf.random.set_seed(0)
+    np.random.seed(0)
+    random.seed(0)
+    
+    early_stopping = tf.keras.callbacks.EarlyStopping(
+        monitor='val_accuracy',
+        patience=10,
+        restore_best_weights=True
+    )
+    
+    checkpoint_callback = tf.keras.callbacks.ModelCheckpoint(
+        filepath="model_combined.keras", 
+        monitor='val_accuracy',            
+        save_best_only=True,           
+        mode='max',                 
+        save_weights_only=False,       
+        verbose=1
+    )
+
+    input_layer = Input(shape=(max_length,))
+    embedding_layer = Embedding(input_dim=vocab_size, output_dim=embedding_dim, weights=[embedding_matrix], trainable=True)(input_layer)
+    
+    gru_output = Bidirectional(GRU(64, return_sequences=True))(embedding_layer)
+    gru_output = Dropout(0.5)(gru_output)
+    gru_output = Bidirectional(GRU(32, return_sequences=True))(gru_output)
+    gru_output = Dropout(0.5)(gru_output)
+    gru_output = Bidirectional(GRU(16, return_sequences=True))(gru_output)
+
+    attention_output = MultiHeadAttention(num_heads=4, key_dim=32)(gru_output, gru_output)
+    attention_output = Dropout(0.5)(attention_output)
+
+    max_output = GlobalMaxPooling1D()(attention_output)
+    mean_output = GlobalAveragePooling1D()(attention_output)
+    gru_output = gru_output[:, -1, :]  # Get the last output of the GRU layer
+    concat_output = tf.keras.layers.Concatenate(axis=1)([max_output, mean_output, gru_output])  # Concatenate the outputs of the two layers 
+    output_layer = Dense(1, activation='sigmoid')(concat_output)  # Final output layer for binary classification
+
+    # Create the model
+    model = Model(inputs=input_layer, outputs=output_layer)
+
+    reduce_lr = tf.keras.callbacks.ReduceLROnPlateau(
+        monitor='val_accuracy',     # Monitor validation loss
+        factor=0.5,             # Factor to reduce the learning rate
+        patience=3,             # Number of epochs with no improvement to wait
+        min_lr=1e-6             # Minimum learning rate limit
+    )
+    # Set optimizer
+    if optimizer == 'adam': optimizer = tf.keras.optimizers.Adam(learning_rate=reduce_lr)
+    elif optimizer == 'sgd': optimizer = tf.keras.optimizers.SGD(learning_rate=reduce_lr)
+    elif optimizer == 'rmsprop': optimizer = tf.keras.optimizers.RMSprop(learning_rate=reduce_lr)
+    else: optimizer = tf.keras.optimizers.Adagrad(learning_rate=lr)
+
+    # Compile the model
+    model.compile(optimizer=optimizer, loss='binary_crossentropy', metrics=['accuracy'])
+
+    # Train the model
+    history = model.fit(
+        X_train, y_train,
+        validation_data=(X_val, y_val),
+        epochs=epochs,
+        batch_size=batch_size,
+        callbacks=[checkpoint_callback, early_stopping, reduce_lr]
+    )
+
+    return model, history
+
+if not Flag or Flag == 10 or Flag == 27 or Flag == 20:
+    model, history = train_model("adagrad", 100, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
     accuracy = best_model.evaluate(X_test, y_test)
