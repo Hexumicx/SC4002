@@ -5,7 +5,7 @@ train_dataset = dataset ['train']
 validation_dataset = dataset ['validation']
 test_dataset = dataset ['test']
 
-Flag = 3
+Flag = 4
 
 # Part 1. Preparing Word Embeddings
 # (a) What is the size of the vocabulary formed from your training data?
@@ -974,7 +974,7 @@ def train_model_all(optimizer, epochs, batch_size, lr, dim1, type = 'RNN', dim2 
 
 
 
-if not Flag or Flag == 2 or Flag == 11:
+if not Flag or Flag == 2:
     for batch_size in [64]:
         for lr in [0.01]:
             for optimizer in ['adagrad']:
@@ -1005,6 +1005,7 @@ if not Flag or Flag == 2 or Flag == 11:
 
 #ADJUST PARAM ON GOOD ON CAN REACH 78% without early stopping and no schedule learning rate
 def train_model(optimizer, epochs, batch_size, lr):
+    tf.keras.backend.clear_session()
     tf.random.set_seed(0)
     np.random.seed(0)
     random.seed(0)
@@ -1089,6 +1090,7 @@ def add_and_norm(x, sublayer_output):
 
 #EVERYTHING WITH ADD and NORM around 75% with schedule learning and no early stopping
 def train_model(optimizer, epochs, batch_size, lr):
+    tf.keras.backend.clear_session()
     tf.random.set_seed(0)
     np.random.seed(0)
     random.seed(0)
@@ -1175,6 +1177,7 @@ if not Flag or Flag == 3:
 
 
 def train_model(optimizer, epochs, batch_size, lr):
+    tf.keras.backend.clear_session()
     tf.random.set_seed(0)
     np.random.seed(0)
     random.seed(0)
@@ -1201,38 +1204,34 @@ def train_model(optimizer, epochs, batch_size, lr):
     embedding_layer = Embedding(input_dim=vocab_size, output_dim=embedding_dim, weights=[embedding_matrix], trainable=True)(input_layer)
     
     gru_output = Bidirectional(GRU(100, return_sequences=True, kernel_regularizer=regularizers.l2(0.0001)))(embedding_layer)
-    gru_output = Dropout(0.5)(gru_output)
+    gru_output = Dropout(0.7)(gru_output)
     attention_output = MultiHeadAttention(num_heads=1, key_dim=100)(gru_output, gru_output)
-    attention_output = Dropout(0.5)(attention_output)
+    attention_output = Dropout(0.7)(attention_output)
     attention_output = attention_output[:, -1, :] 
     gru_output = gru_output[:, -1, :]
     attention_with_residual = add_and_norm(gru_output, attention_output)
-    # attention_output = attention_output[:, -1, :]
-    # max_output = GlobalMaxPooling1D()(attention_output)
-    # mean_output = GlobalAveragePooling1D()(attention_output)
-    # gru_output = gru_output[:, -1, :]  # Get the last output of the GRU layer
-    # concat_output = tf.keras.layers.Concatenate(axis=1)([max_output, mean_output, gru_output])  # Concatenate the outputs of the two layers 
     dense_output = Dense(50, activation='relu')(attention_with_residual)
-    dense_output = Dropout(0.5)(dense_output)
+    dense_output = Dropout(0.7)(dense_output)
     dense_with_residual = add_and_norm(attention_with_residual, dense_output)
 
     #Parallel CNN
     cnn_output1 = Convolution1D(100, kernel_size=5, strides = 2, activation='relu', kernel_regularizer=regularizers.l2(0.0001))(embedding_layer)
     maxpool_output1 = MaxPooling1D(pool_size=5, strides=2)(cnn_output1)
-    maxpool_output1_d = Dropout(0.5)(maxpool_output1)
+    maxpool_output1_d = Dropout(0.7)(maxpool_output1)
     cnn_output2 = Convolution1D(50, kernel_size=3, strides = 1, activation='relu', kernel_regularizer=regularizers.l2(0.0001))(maxpool_output1_d)
     maxpool_output2 = MaxPooling1D(pool_size=3, strides=2)(cnn_output2)
-    maxpool_output2_d = Dropout(0.5)(maxpool_output2)
+    maxpool_output2_d = Dropout(0.7)(maxpool_output2)
     cnn_skip1 = Convolution1D(50, kernel_size=1, activation='relu')(maxpool_output1)
     skip_connection = tf.keras.layers.Concatenate(axis=1)([cnn_skip1, maxpool_output2_d])
     cnn_output3 = Convolution1D(25, kernel_size=3, strides = 1, activation='relu', kernel_regularizer=regularizers.l2(0.0001))(skip_connection)
     maxpool_output3 = MaxPooling1D(pool_size=2, strides=1)(cnn_output3)
-    maxpool_output3_d = Dropout(0.5)(maxpool_output3)
+    maxpool_output3_d = Dropout(0.7)(maxpool_output3)
     flatten_output = Flatten()(maxpool_output3_d)
     linear_output = Dense(50, activation='relu')(flatten_output)
-    linear_output = Dropout(0.5)(linear_output)
+    linear_output = Dropout(0.7)(linear_output)
 
     concat_output = tf.keras.layers.Concatenate(axis=1)([linear_output, dense_with_residual])
+    # concat_output = Dense(16, activation='relu')(concat_output)
     output_layer = Dense(1, activation='sigmoid')(concat_output)  # Final output layer for binary classification
 
     # Create the model
@@ -1265,8 +1264,8 @@ def train_model(optimizer, epochs, batch_size, lr):
     return model, history
 
 
-if not Flag or Flag == 3:
-    model, history = train_model("adagrad", 100, 64, 0.01)
+if not Flag or Flag == 4:
+    model, history = train_model("adagrad", 200, 64, 0.01)
 
     best_model = tf.keras.models.load_model("model_combined.keras")
     accuracy = best_model.evaluate(X_test, y_test)
@@ -1314,6 +1313,7 @@ class TransformerEncoderBlock(Layer):
         return config
     
 def train_model(optimizer, epochs, batch_size, lr):
+    tf.keras.backend.clear_session()
     tf.random.set_seed(0)
     np.random.seed(0)
     random.seed(0)
